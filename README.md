@@ -1,6 +1,6 @@
 # Conference Programme Management
 
-Student project **P01** — Algebra Bernays University, 2026/27. Author: Lara Babić.
+Student project **P01** - Algebra Bernays University, 2026/27. Author: Lara Babić.
 
 Conference organisers publish a call for papers, speakers submit sessions, and the programme
 committee assembles those sessions into a schedule of rooms and time slots.
@@ -11,6 +11,27 @@ screens yet.
 **Technology:** Java 25, Spring Boot 4.1.2, Thymeleaf, Spring Data JPA, PostgreSQL 17, Flyway, Maven.
 
 **Requirements:** JDK 25 and Docker Desktop.
+
+## Prototype
+
+Figma file: <https://www.figma.com/make/8qScEHl1xTnz1NMIzN4P7I/Conference-Programme-P01>
+
+Clickable demo: <https://hacks-viral-51888929.figma.site/>
+
+Six screens: sessions list, session detail, proposal form, the same form showing validation
+errors, confirmation, and the panel where the committee reviews the AI suggestions.
+
+## Planned deployment
+
+| | Choice |
+|---|---|
+| Hosting | Render, from the `Dockerfile` |
+| Database | Neon, managed PostgreSQL |
+| AI provider | Google Gemini |
+
+Gemini was chosen because it is the only one of the candidates with a free tier that needs no
+credit card, and the AI feature has to run against the real provider in the deployed instance.
+The reasoning is recorded in an architecture decision record when the feature is built.
 
 ## Docker
 
@@ -28,7 +49,7 @@ Check it works: <http://localhost:8080/actuator/health> returns `{"status":"UP"}
 
 ## Running from the IDE
 
-Database in Docker, application outside it — faster, and the debugger works:
+Database in Docker, application outside it - faster, and the debugger works:
 
 ```bash
 docker compose up db -d
@@ -43,5 +64,5 @@ Set `JAVA_HOME` to JDK 25 first, and always use `./mvnw` rather than `mvn`.
 docker compose exec db psql -U conference -d conference
 ```
 
-Local credentials are `conference` / `conference`, port 5432. Development only — the deployed
+Local credentials are `conference` / `conference`, port 5432. Development only - the deployed
 instance reads its datasource from environment variables.
