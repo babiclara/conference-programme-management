@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Not found')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <h1>Not found</h1>
+    <p th:text="${message}">Something does not exist.</p>
+    <p><a th:href="@{/conferences}">← All conferences</a></p>
+</main>
+</body>
+</html>

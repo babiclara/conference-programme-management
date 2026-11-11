@@ -5,8 +5,8 @@ Student project **P01** - Algebra Bernays University, 2026/27. Author: Lara Babi
 Conference organisers publish a call for papers, speakers submit sessions, and the programme
 committee assembles those sessions into a schedule of rooms and time slots.
 
-**Status:** Milestone M1. The application starts and connects to PostgreSQL. No entities or
-screens yet.
+**Status:** Milestone M2 in progress. Schema and seed data in Flyway, entities and repositories
+mapped, conference list and detail screens working. Create, edit and delete still to come.
 
 **Technology:** Java 25, Spring Boot 4.1.2, Thymeleaf, Spring Data JPA, PostgreSQL 17, Flyway, Maven.
 
@@ -14,12 +14,21 @@ screens yet.
 
 ## Prototype
 
-Figma file: <https://www.figma.com/make/8qScEHl1xTnz1NMIzN4P7I/Conference-Programme-P01>
-
-Clickable demo: <https://hacks-viral-51888929.figma.site/>
+Figma file: <https://hacks-viral-51888929.figma.site/>
 
 Six screens: sessions list, session detail, proposal form, the same form showing validation
 errors, confirmation, and the panel where the committee reviews the AI suggestions.
+
+| Figma frame | Thymeleaf template |
+|---|---|
+| Conference list | `templates/conferences/list.html` |
+| Conference detail | `templates/conferences/detail.html` |
+| Empty state | `conferences/detail.html`, shown when a conference has no sessions |
+| Proposal form | not built yet |
+| Form with validation errors | not built yet |
+| AI suggestions panel | not built yet |
+
+The wireframes and component pages of the Figma file are still to be produced.
 
 ## Planned deployment
 

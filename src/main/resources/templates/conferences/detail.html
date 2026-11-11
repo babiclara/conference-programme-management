@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(${conference.name})}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <p class="crumb"><a th:href="@{/conferences}">← All conferences</a></p>
+
+    <h1 th:text="${conference.name}">Conference name</h1>
+
+    <dl>
+        <dt>Dates</dt>
+        <dd>
+            <span th:text="${#temporals.format(conference.startDate, 'd MMM yyyy')}">start</span>
+            –
+            <span th:text="${#temporals.format(conference.endDate, 'd MMM yyyy')}">end</span>
+        </dd>
+        <dt>Status</dt>
+        <dd><span class="badge" th:text="${conference.status}">STATUS</span></dd>
+        <dt>Call for papers closes</dt>
+        <dd th:text="${conference.cfpDeadline != null
+                      ? #temporals.format(conference.cfpDeadline, 'd MMM yyyy, HH:mm')
+                      : 'not set'}">deadline</dd>
+    </dl>
+
+    <h2>Sessions</h2>
+
+    <p th:if="${sessions.isEmpty()}" class="empty">This conference has no sessions yet.</p>
+
+    <table th:unless="${sessions.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Track</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sessionItem : ${sessions}">
+            <td th:text="${sessionItem.title}">Title</td>
+            <td th:text="${sessionItem.track != null ? sessionItem.track : '—'}">Track</td>
+            <td><span class="badge" th:text="${sessionItem.status}">STATUS</span></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Conferences')}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <h1>Conferences</h1>
+
+    <p th:if="${conferences.isEmpty()}" class="empty">No conferences yet.</p>
+
+    <table th:unless="${conferences.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Dates</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="conference : ${conferences}">
+            <td>
+                <a th:href="@{/conferences/{id}(id=${conference.id})}"
+                   th:text="${conference.name}">Name</a>
+            </td>
+            <td>
+                <span th:text="${#temporals.format(conference.startDate, 'd MMM yyyy')}">start</span>
+                –
+                <span th:text="${#temporals.format(conference.endDate, 'd MMM yyyy')}">end</span>
+            </td>
+            <td>
+                <span class="badge" th:text="${conference.status}">STATUS</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
