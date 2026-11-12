@@ -29,28 +29,30 @@ public class SessionService {
     }
 
     @Transactional
-    public Session create(Long conferenceId, Session changes) {
+    public Session create(Long conferenceId, SessionData data) {
         Conference conference = conferenceService.findById(conferenceId);
-        Session session = new Session(conference, changes.getTitle(), changes.getAbstractText());
-        session.setTrack(changes.getTrack());
-        session.setPublicSummary(changes.getPublicSummary());
-        session.setStatus(changes.getStatus());
+        Session session = new Session(conference, data.title(), data.abstractText());
+        apply(session, data);
         return sessions.save(session);
     }
 
     @Transactional
-    public Session update(Long id, Session changes) {
+    public Session update(Long id, SessionData data) {
         Session session = findById(id);
-        session.setTitle(changes.getTitle());
-        session.setAbstractText(changes.getAbstractText());
-        session.setTrack(changes.getTrack());
-        session.setPublicSummary(changes.getPublicSummary());
-        session.setStatus(changes.getStatus());
+        session.setTitle(data.title());
+        session.setAbstractText(data.abstractText());
+        apply(session, data);
         return session;
     }
 
     @Transactional
     public void delete(Long id) {
         sessions.delete(findById(id));
+    }
+
+    private void apply(Session session, SessionData data) {
+        session.setTrack(data.track());
+        session.setPublicSummary(data.publicSummary());
+        session.setStatus(data.status());
     }
 }

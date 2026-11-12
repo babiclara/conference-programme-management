@@ -35,7 +35,11 @@
                       : 'not set'}">deadline</dd>
     </dl>
 
-    <h2>Sessions</h2>
+    <div class="page-head">
+        <h2>Sessions</h2>
+        <a class="button primary"
+           th:href="@{/conferences/{id}/sessions/new(id=${conference.id})}">Add session</a>
+    </div>
 
     <p th:if="${sessions.isEmpty()}" class="empty">This conference has no sessions yet.</p>
 
@@ -45,6 +49,7 @@
             <th>Title</th>
             <th>Track</th>
             <th>Status</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -52,6 +57,13 @@
             <td th:text="${sessionItem.title}">Title</td>
             <td th:text="${sessionItem.track != null ? sessionItem.track : '—'}">Track</td>
             <td><span class="badge" th:text="${sessionItem.status}">STATUS</span></td>
+            <td class="row-actions">
+                <a th:href="@{/sessions/{id}/edit(id=${sessionItem.id})}">Edit</a>
+                <form th:action="@{/sessions/{id}/delete(id=${sessionItem.id})}" method="post"
+                      th:attr="onsubmit=|return confirm('Delete &quot;${sessionItem.title}&quot;?');|">
+                    <button type="submit" class="link-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

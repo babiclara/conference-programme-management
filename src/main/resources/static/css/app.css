@@ -146,11 +146,18 @@ dd { margin: 0; }
 
 .danger:hover { background: #fdf1f1; }
 
-form {
+main > form {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 6px;
     padding: 22px;
+}
+
+.actions form, .row-actions form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
 }
 
 label {
@@ -214,3 +221,52 @@ form .actions { margin-top: 4px; }
     background: #fdf1f1;
     color: #a72020;
 }
+
+textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 9px 11px;
+    border: 1px solid #ccd0d5;
+    border-radius: 6px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: 2px solid rgba(31, 95, 169, 0.35);
+    outline-offset: 1px;
+    border-color: var(--accent);
+}
+
+textarea.invalid {
+    border-color: #c0392b;
+    background: #fdf6f5;
+}
+
+.row-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.row-actions form { margin: 0; padding: 0; border: none; background: none; }
+
+.row-actions a, .link-danger {
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.row-actions a { color: var(--accent); }
+
+.link-danger { color: #a72020; }
+
+.link-danger:hover, .row-actions a:hover { background: none; text-decoration: underline; }
+
+.page-head h2 { margin: 0; }
