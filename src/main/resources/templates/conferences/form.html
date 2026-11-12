@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(${heading})}"></head>
+<body>
+<nav th:replace="~{fragments :: nav}"></nav>
+
+<main>
+    <p class="crumb"><a th:href="@{/conferences}">← All conferences</a></p>
+
+    <h1 th:text="${heading}">Conference</h1>
+
+    <form th:action="@{${action}}" th:object="${form}" method="post">
+
+        <div th:if="${#fields.hasAnyErrors()}" class="flash error">
+            Please correct the highlighted fields.
+        </div>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}"
+               th:errorclass="invalid" placeholder="JavaCro 2027">
+        <p class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</p>
+
+        <label for="startDate">Start date</label>
+        <input type="date" id="startDate" th:field="*{startDate}" th:errorclass="invalid">
+        <p class="field-error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">error</p>
+
+        <label for="endDate">End date</label>
+        <input type="date" id="endDate" th:field="*{endDate}" th:errorclass="invalid">
+        <p class="field-error" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">error</p>
+        <p class="field-error" th:if="${#fields.hasErrors('datesOrdered')}" th:errors="*{datesOrdered}">error</p>
+
+        <label for="cfpDeadline">Call for papers closes</label>
+        <input type="datetime-local" id="cfpDeadline" th:field="*{cfpDeadline}" th:errorclass="invalid">
+        <p class="hint">Optional.</p>
+
+        <label for="status">Status</label>
+        <select id="status" th:field="*{status}" th:errorclass="invalid">
+            <option th:each="value : ${statuses}" th:value="${value}" th:text="${value}">STATUS</option>
+        </select>
+
+        <div class="actions">
+            <button type="submit" class="primary">Save</button>
+            <a class="button" th:href="@{/conferences}">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

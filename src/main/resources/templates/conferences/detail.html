@@ -7,7 +7,18 @@
 <main>
     <p class="crumb"><a th:href="@{/conferences}">← All conferences</a></p>
 
-    <h1 th:text="${conference.name}">Conference name</h1>
+    <div th:replace="~{fragments :: flash}"></div>
+
+    <div class="page-head">
+        <h1 th:text="${conference.name}">Conference name</h1>
+        <span class="actions">
+            <a class="button" th:href="@{/conferences/{id}/edit(id=${conference.id})}">Edit</a>
+            <form th:action="@{/conferences/{id}/delete(id=${conference.id})}" method="post"
+                  onsubmit="return confirm('Delete this conference and all of its sessions?');">
+                <button type="submit" class="danger">Delete</button>
+            </form>
+        </span>
+    </div>
 
     <dl>
         <dt>Dates</dt>
