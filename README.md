@@ -5,8 +5,9 @@ Student project **P01** - Algebra Bernays University, 2026/27. Author: Lara Babi
 Conference organisers publish a call for papers, speakers submit sessions, and the programme
 committee assembles those sessions into a schedule of rooms and time slots.
 
-**Status:** Milestone M2 in progress. Schema and seed data in Flyway, entities and repositories
-mapped, conference list and detail screens working. Create, edit and delete still to come.
+**Status:** Milestone M2 complete. Schema and seed data in Flyway, entities and repositories
+mapped, full create-read-update-delete on conferences and their sessions across five Thymeleaf
+screens, and the Figma prototype finished. Next is M3: security, the REST API and the AI feature.
 
 **Technology:** Java 25, Spring Boot 4.1.2, Thymeleaf, Spring Data JPA, PostgreSQL 17, Flyway, Maven.
 
@@ -14,21 +15,37 @@ mapped, conference list and detail screens working. Create, edit and delete stil
 
 ## Prototype
 
-Figma file: <https://hacks-viral-51888929.figma.site/>
+Figma file: <https://www.figma.com/design/GVvt1DJBjjtCDQDyC8vwjI/Conference-Programme-P01>
 
-Six screens: sessions list, session detail, proposal form, the same form showing validation
-errors, confirmation, and the panel where the committee reviews the AI suggestions.
+Three pages, as section 4 of the brief requires:
+
+- **Wireframes** - six low-fidelity greyscale frames, `W1` to `W6`, produced before any styling.
+- **Components** - seven components built with auto layout and bound to the `Color` and `Layout`
+  variables: Button, Text input, Text area, Select, Table row, Status chip, Flash message.
+- **Screens** - six high-fidelity screens, `S1` to `S6`, assembled from those components.
+
+The variables hold the same values as `src/main/resources/static/css/app.css`, so the
+prototype and the running application share one palette and spacing scale.
 
 | Figma frame | Thymeleaf template |
 |---|---|
-| Conference list | `templates/conferences/list.html` |
-| Conference detail | `templates/conferences/detail.html` |
-| Empty state | `conferences/detail.html`, shown when a conference has no sessions |
-| Proposal form | not built yet |
-| Form with validation errors | not built yet |
-| AI suggestions panel | not built yet |
+| `S1 Conference list` | `templates/conferences/list.html` |
+| `S2 Conference detail` | `templates/conferences/detail.html` |
+| `S3 Empty state` | `conferences/detail.html`, shown when a conference has no sessions |
+| `S4 Session form` | `templates/sessions/form.html` |
+| `S5 Form with errors` | `sessions/form.html`, rendered when Bean Validation rejects the submit |
+| `S6 Proposal review` | not implemented yet - the AI feature is due at M3 |
 
-The wireframes and component pages of the Figma file are still to be produced.
+Deviations from the prototype, as the brief asks them to be listed:
+
+- The conference create and edit form (`conferences/form.html`) has no prototype frame of its
+  own. It is the session form with different fields, so `S4` covers both.
+- `S1` shows Edit and Delete actions on each row. The implemented list links the conference
+  name through to its detail screen and keeps those actions there instead, which avoids
+  repeating a destructive action in two places.
+- The prototype's Status chips are flat grey. The templates render the same chips, and colour
+  per status is deliberately left out until the AI feature introduces a reason to distinguish
+  them.
 
 ## Planned deployment
 
