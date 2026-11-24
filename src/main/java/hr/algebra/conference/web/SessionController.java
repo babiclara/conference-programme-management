@@ -1,5 +1,6 @@
 package hr.algebra.conference.web;
 
+import hr.algebra.conference.domain.Conference;
 import hr.algebra.conference.domain.Session;
 import hr.algebra.conference.domain.SessionStatus;
 import hr.algebra.conference.service.ConferenceService;
@@ -60,7 +61,7 @@ public class SessionController {
     public String editForm(@PathVariable Long id, Model model) {
         Session session = sessionService.findById(id);
         model.addAttribute("form", SessionForm.of(session));
-        model.addAttribute("conference", session.getConference());
+        model.addAttribute("conference", parentOf(session));
         model.addAttribute("heading", "Edit session");
         model.addAttribute("action", "/sessions/" + id);
         return "sessions/form";
@@ -74,7 +75,7 @@ public class SessionController {
                          RedirectAttributes redirect) {
         Session session = sessionService.findById(id);
         if (binding.hasErrors()) {
-            model.addAttribute("conference", session.getConference());
+            model.addAttribute("conference", parentOf(session));
             model.addAttribute("heading", "Edit session");
             model.addAttribute("action", "/sessions/" + id);
             return "sessions/form";
@@ -82,6 +83,10 @@ public class SessionController {
         sessionService.update(id, form.toData());
         redirect.addFlashAttribute("message", "Session updated.");
         return "redirect:/conferences/" + session.getConference().getId();
+    }
+
+    private Conference parentOf(Session session) {
+        return conferenceService.findById(session.getConference().getId());
     }
 
     @PostMapping("/sessions/{id}/delete")

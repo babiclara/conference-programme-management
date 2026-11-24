@@ -31,7 +31,7 @@
         <dd><span class="badge" th:text="${conference.status}">STATUS</span></dd>
         <dt>Call for papers closes</dt>
         <dd th:text="${conference.cfpDeadline != null
-                      ? #temporals.format(conference.cfpDeadline, 'd MMM yyyy, HH:mm')
+                      ? #temporals.format(conference.cfpDeadline.atZoneSameInstant(T(java.time.ZoneId).systemDefault()).toLocalDateTime(), 'd MMM yyyy, HH:mm')
                       : 'not set'}">deadline</dd>
     </dl>
 

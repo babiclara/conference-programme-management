@@ -92,3 +92,6 @@ docker compose exec db psql -U conference -d conference
 
 Local credentials are `conference` / `conference`, port 5432. Development only - the deployed
 instance reads its datasource from environment variables.
+
+The connection pool is sized deliberately at five fixed connections. The reasoning is in
+[ADR 0002](docs/adr/0002-connection-pool-sizing.md).
